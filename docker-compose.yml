@@ -1,7 +1,7 @@
 version: '2'
 services:
   wiki:
-    image: 'ryu310/pukiwiki-plus:7-apache'
+    image: 'ryu310/pukiwiki-plus:7-apache-1.4.7-01'
     build:
       context: .
       dockerfile: Dockerfile
