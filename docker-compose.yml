@@ -1,0 +1,13 @@
+version: '2'
+services:
+  wiki:
+    image: 'ryu310/pukiwiki-plus:7-apache'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - 'wiki_data:/var/www/html'
+    ports:
+      - 80:80
+volumes:
+  wiki_data:
