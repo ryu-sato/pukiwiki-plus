@@ -4,7 +4,7 @@ MAINTAINER Ryu Sato <ryu@weseek.co.jp>
 
 VOLUME /var/www/html
 
-# Static variables
+# Static environment value
 ENV PUKIWIKIPLUS_INITDIR /usr/src/pukiwiki_plus
 ENV PUKIWIKIPLUS_PLUGINDIR ${PUKIWIKIPLUS_INITDIR}/plugin
 
@@ -25,7 +25,11 @@ RUN cd ${PUKIWIKIPLUS_PLUGINDIR} \
 RUN cd ${PUKIWIKIPLUS_INITDIR} \
 	&& chown -R www-data:www-data ${PUKIWIKIPLUS_INITDIR}
 
+# Prepare apache user for sudoers
+RUN apt-get update && apt-get install -y sudo
+RUN echo "${APACHE_RUN_USER:-www-data} ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 COPY scripts/app-entrypoint.sh /
-ENTRYPOINT ["/app-entrypoint.sh"]
-CMD ["apache2-foreground"]
+USER ${APACHE_RUN_USER:-www-data}
+ENTRYPOINT ["sudo", "/app-entrypoint.sh"]
+CMD ["sudo", "apache2-foreground"]

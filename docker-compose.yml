@@ -9,5 +9,7 @@ services:
       - 'wiki_data:/var/www/html'
     ports:
       - 80:80
+    # Enable to restart container (It is useful for Docker for Windows)
+    #restart: always
 volumes:
   wiki_data:
