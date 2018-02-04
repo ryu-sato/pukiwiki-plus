@@ -40,5 +40,5 @@ COPY scripts/app-entrypoint.sh /
 USER ${APACHE_RUN_USER:-www-data}
 # Use shell form with ENV
 #   cf. https://github.com/moby/moby/issues/5509
-ENTRYPOINT [ "sudo", "-E", "/app-entrypoint.sh" ]
+ENTRYPOINT [ "sudo", "-E", "sh", "-c", "/app-entrypoint.sh" ]
 CMD ["sudo", "-E", "apache2-foreground"]
