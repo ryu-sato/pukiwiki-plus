@@ -20,10 +20,11 @@ if [ "$SUBDIR" != "/" ]; then
   # Set config to redirect subdir
   REDIRECT_CONF=conf-available/redirect-subdir.conf
   a2enmod rewrite
-  cat > /etc/apache2/$REDIRECT_CONF <<- EOV
+  ( cat > /etc/apache2/$REDIRECT_CONF <<- EOV
 	RewriteEngine on
 	RewriteRule ^/\$ $SUBDIR [R,L]
 EOV
+  ) || true
   (test ${SUBDIR} != "/" \
    && a2enconf redirect-subdir \
    && sed -i \
