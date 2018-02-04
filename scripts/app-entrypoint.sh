@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 SUBDIR=${1:-/}
 PUKIWIKIPLUS_INITDIR=/usr/src/pukiwiki_plus
