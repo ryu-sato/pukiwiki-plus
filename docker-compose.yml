@@ -7,8 +7,9 @@ services:
       dockerfile: Dockerfile
     volumes:
       - 'wiki_data:/var/www/html'
-    environment:
-      - SUBDIR=/wiki
+    # Set if you want to access subdir name instead of root like `http://localhost/wiki/`
+    #environment:
+    #  - SUBDIR=/wiki
     ports:
       - 80:80
     # Enable to restart container (It is useful for Docker for Windows)
