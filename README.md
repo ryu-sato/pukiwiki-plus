@@ -24,17 +24,11 @@ $ docker-compose up -d
 ## Use subdirectory instead of root
 
 If you want to access pukiwiki plus with sub directory path like `http://localhost/wiki/`,
-build container with setting `--build-arg SUBDIR=/wiki`.
+running with SUBDIR environment.
 
 ```sh
-$ git clone https://github.com/ryu-sato/pukiwiki-plus-docker-compose.git
-$ cd pukiwiki-plus-docker-compose
-$ docker build --build-arg SUBDIR=/wiki -t my-pukiwiki-plus .
+$ docker run --env SUBDIR=/wiki --name my-pukiwiki-plus ryu310/pukiwiki-plus
 ```
-
-### TODO
-
-- [ ] Enabled to use subdir when execute `docker run`
 
 # for Developer
 
