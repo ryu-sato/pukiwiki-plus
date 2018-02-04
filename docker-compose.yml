@@ -1,12 +1,14 @@
 version: '2'
 services:
   wiki:
-    image: 'ryu310/pukiwiki-plus:7-apache-1.4.7-03'
+    image: 'ryu310/pukiwiki-plus:7-apache-1.4.7-04'
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - 'wiki_data:/var/www/html'
+    environment:
+      - SUBDIR=/wiki
     ports:
       - 80:80
     # Enable to restart container (It is useful for Docker for Windows)
