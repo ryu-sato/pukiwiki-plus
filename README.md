@@ -21,6 +21,21 @@ $ sed -i "/- 'wiki_data:/ s|wiki_data:|/var/www/html/wiki:|" docker-compose.yml
 $ docker-compose up -d
 ```
 
+## Use subdirectory instead of root
+
+If you want to access pukiwiki plus with sub directory path like `http://localhost/wiki/`,
+build container with setting `--build-arg SUBDIR=/wiki`.
+
+```sh
+$ git clone https://github.com/ryu-sato/pukiwiki-plus-docker-compose.git
+$ cd pukiwiki-plus-docker-compose
+$ docker build --build-arg SUBDIR=/wiki -t my-pukiwiki-plus .
+```
+
+### TODO
+
+- [ ] Enabled to use subdir when execute `docker run`
+
 # for Developer
 
 ## How to install PukiWiki Plus plugins
