@@ -5,15 +5,14 @@ PUKIWIKIPLUS_INITDIR=/usr/src/pukiwiki_plus
 VOLUME_DIR=/var/www/html
 PUKIWIKIPLUS_DATADIR=${VOLUME_DIR%/}${SUBDIR}
 
-if [ ! -d "${PUKIWIKIPLUS_DATADIR}/wiki" ]; then
-  echo "Initializing PukiWiki Plus..."
-  echo "Creating PukiWiki Plus directory...: ${PUKIWIKIPLUS_DATADIR}"
-  mkdir -p "${PUKIWIKIPLUS_DATADIR}"
+if [ ! -f "${PUKIWIKIPLUS_DATADIR}/pukiwiki.ini.php" ]; then
+  echo "Installing PukiWiki Plus..."
+  echo "Create PukiWiki Plus directory. ${PUKIWIKIPLUS_DATADIR}"
+  mkdir -p "${PUKIWIKIPLUS_DATADIR}" || true
   shopt -s dotglob
-  echo "Copying PukiWiki Plus directory..."
+  echo "Copy PukiWiki Plus directory."
   cp -rp ${PUKIWIKIPLUS_INITDIR}/* ${PUKIWIKIPLUS_DATADIR}
-  echo "PukiWiki Plus initialized."
-
+  echo "PukiWiki Plus was installed."
 fi
 
 if [ "$SUBDIR" != "/" ]; then
