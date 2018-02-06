@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -y \
 RUN echo "${APACHE_RUN_USER:-www-data} ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 COPY scripts/app-entrypoint.sh /
+RUN chmod +x /app-entrypoint.sh
 USER ${APACHE_RUN_USER:-www-data}
-ENTRYPOINT [ "sudo", "-E", "sh", "-c", "/app-entrypoint.sh" ]
+ENTRYPOINT [ "sudo", "-E", "/app-entrypoint.sh" ]
 CMD ["sudo", "-E", "apache2-foreground"]
