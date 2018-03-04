@@ -4,6 +4,7 @@ SUBDIR=${SUBDIR:-/}
 PUKIWIKIPLUS_INITDIR=/usr/src/pukiwiki_plus
 VOLUME_DIR=/var/www/html
 PUKIWIKIPLUS_DATADIR=${VOLUME_DIR%/}${SUBDIR}
+WITHOUT_APACHEGUI=${WITH_APACHEGUI:-}
 
 if [ ! -f "${PUKIWIKIPLUS_DATADIR}/pukiwiki.ini.php" ]; then
   echo "Installing PukiWiki Plus..."
@@ -30,6 +31,10 @@ EOV
        -e "s|^\(\s*#Include conf-available/.*\)$|\1\n\tInclude ${REDIRECT_CONF}|" \
       /etc/apache2/sites-available/000-default.conf \
   ) || true
+fi
+
+if [ "${WITHOUT_APACHEGUI}" != "WITHOUT_APACHEGUI" ]; then
+  cd "${APACHEGUI_HOME}/bin" && ./run.sh && cd "/"
 fi
 
 exec "apache2-foreground"

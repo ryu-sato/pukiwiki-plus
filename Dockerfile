@@ -2,16 +2,28 @@ FROM php:7-apache
 
 MAINTAINER Ryu Sato <ryu@weseek.co.jp>
 
-VOLUME /var/www/html
-
 # Variable environment value
 ENV SUBDIR "/"
+ENV WITHOUT_APACHEGUI ""
 
 # Const environment value
 ARG PUKIWIKIPLUS_INITDIR="/usr/src/pukiwiki_plus"
 ARG PUKIWIKIPLUS_PLUGINDIR="${PUKIWIKIPLUS_INITDIR}/plugin"
 
-# Install pukiwiki-plus
+# Install ApacheGUI
+## It is needed to make directory "/usr/share/man/man1"
+## cf. https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
+RUN mkdir -p /usr/share/man/man1 \
+    && apt-get update && apt-get install -y \
+      tar wget openjdk-8-jre \
+    && rm -rf /var/lib/apt/lists/*
+RUN cd ~ \
+    && wget https://netcologne.dl.sourceforge.net/project/apachegui/1.11-Linux-Solaris-Mac/ApacheGUI-1.11.0.tar.gz -O ApacheGUI.tar.gz \
+    && tar zxvf ApacheGUI.tar.gz \
+    && mv ApacheGUI /opt
+ENV APACHEGUI_HOME "/opt/ApacheGUI"
+
+# Install Pukiwiki
 RUN cd /
 RUN apt-get update && apt-get install -y \
       git \
@@ -35,6 +47,10 @@ RUN apt-get update && apt-get install -y \
       sudo \
     && rm -rf /var/lib/apt/lists/*
 RUN echo "${APACHE_RUN_USER:-www-data} ALL=NOPASSWD: ALL" >> /etc/sudoers
+
+VOLUME /var/www/html
+VOLUME /etc/apache2
+VOLUME /opt/ApacheGUI/tomcat/db
 
 COPY scripts/app-entrypoint.sh /
 RUN chmod +x /app-entrypoint.sh
