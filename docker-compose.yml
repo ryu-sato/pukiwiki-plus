@@ -1,7 +1,7 @@
 version: '2'
 services:
   wiki:
-    image: 'ryu310/pukiwiki-plus:php-7.2.2-apache-1.4.7-01'
+    image: 'ryu310/pukiwiki-plus:php-7.2.2-apache-1.4.7-02'
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,6 +9,7 @@ services:
       - 'wiki_data:/var/www/html'
       - 'apache_config:/etc/apache2'
       - 'apachegui_db:/opt/ApacheGUI/tomcat/db'
+      - 'php_config:/usr/local/etc/php'
     # Set if you want to access subdir name instead of root like `http://localhost/wiki/`
 #    environment:
 #      - SUBDIR=/wiki
@@ -21,3 +22,5 @@ volumes:
   wiki_data:
   apache_config:
   apachegui_db:
+  php_config:
+
