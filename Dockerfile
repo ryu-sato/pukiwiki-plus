@@ -51,6 +51,7 @@ RUN echo "${APACHE_RUN_USER:-www-data} ALL=NOPASSWD: ALL" >> /etc/sudoers
 VOLUME /var/www/html
 VOLUME /etc/apache2
 VOLUME /opt/ApacheGUI/tomcat/db
+VOLUME /usr/local/etc/php
 
 COPY scripts/app-entrypoint.sh /
 RUN chmod +x /app-entrypoint.sh
