@@ -30,6 +30,10 @@ running with SUBDIR environment.
 $ docker run --env SUBDIR=/wiki --name my-pukiwiki-plus ryu310/pukiwiki-plus
 ```
 
+## Configure Apache
+
+[Apache設定](https://github.com/ryu-sato/pukiwiki-plus-docker-compose/wiki/Apache-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B)
+
 # for Developer
 
 ## How to install PukiWiki Plus plugins
